@@ -85,11 +85,11 @@
     {
         if($this->ACLAccess('edit'))
         {
-	    if($isduplicate=="true")
-	    {
-	        return true;
-	    }
-            $removeFile = "upload://{$this->id}";	    
+	        if($isduplicate=="true")
+	        {
+                    return true;
+	        }
+                $removeFile = "upload://{$this->id}";	    
         }
 
 	if(!empty($this->doc_type) && !empty($this->doc_id))
