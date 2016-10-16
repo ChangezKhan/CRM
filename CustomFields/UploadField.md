@@ -40,14 +40,36 @@
         'importable' => false,
     );
 
-### Now, add following code to `editviewdefs.php` file in following location:
+### Now, open `editviewdefs.php` file of following location:
 
     custom/modules/<module_name>/metadata/editviewdefs.php
 
-#### Code: 
+### Now, add following code to `form` array: 
 
     'enctype' => 'multipart/form-data',
 
 ### Now, do a "Quick Repair & Rebuild". 
 
+### After this, you can see this field in `Studio`. You may change its label name and move into `Edit` or `Detail` view, as your need.
+
+### Now for all modules, download attachment will work smoothly, except `Cases` module. To work with `Cases` modules, we will need to tweak `download.php` file a little bit. You will find this find in root folder of your CRM.
+
+    <CRM>/download.php
+
+### Now, add following lines of code after `$bean_name = $beanList[$module];`, 
+
+    if($module == "Cases")
+    {
+        $bean_name = "Case";
+    }
+
+### And, add another `elseif` to fetch `filename` and `file_mime_type` from `cases` table
+
+    elseif($file_type == 'cases') 
+    {
+        $query = "SELECT filename name, file_mime_type FROM cases ";
+	$query .= "WHERE cases.id = '" . $db->quote($_REQUEST['id']) ."'";
+    }
+
+### After this, you can download attachment for `Cases` module also.
 
