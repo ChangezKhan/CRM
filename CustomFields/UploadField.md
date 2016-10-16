@@ -87,48 +87,48 @@
         {
 	        if($isduplicate=="true")
 	        {
-                    return true;
+                return true;
 	        }
-                $removeFile = "upload://{$this->id}";	    
+            $removeFile = "upload://{$this->id}";	    
         }
 
-	if(!empty($this->doc_type) && !empty($this->doc_id))
-	{
-	    $document = ExternalAPIFactory::loadAPI($this->doc_type);
-	    $response = $document->deleteDoc($this);
-	    $this->doc_type = '';
-	    $this->doc_id = '';
-	    $this->doc_url = '';
-	    $this->filename = '';
-	    $this->file_mime_type = '';
-	}
+		if(!empty($this->doc_type) && !empty($this->doc_id))
+		{
+		    $document = ExternalAPIFactory::loadAPI($this->doc_type);
+		    $response = $document->deleteDoc($this);
+		    $this->doc_type = '';
+		    $this->doc_id = '';
+		    $this->doc_url = '';
+		    $this->filename = '';
+		    $this->file_mime_type = '';
+		}
 
-	if(file_exists($removeFile))
-	{
-	    if(!unlink($removeFile))
-	    {
-	        $GLOBALS['log']->error("*** Could not unlink() file: [ {$removeFile} ]");
-	    }
-	    else
-	    {
-	        $this->filename = '';
-	        $this->file_mime_type = '';
-	        $this->file = '';
-	        $this->save();
-	        return true;
-	    }
-	}
-	else
-	{
-	    $this->filename = '';
-	    $this->file_mime_type = '';
-	    $this->file = '';
-	    $this->doc_id = '';
-	    $this->save();
-	    return true;
-	}
+		if(file_exists($removeFile))
+		{
+		    if(!unlink($removeFile))
+		    {
+			$GLOBALS['log']->error("*** Could not unlink() file: [ {$removeFile} ]");
+		    }
+		    else
+		    {
+			$this->filename = '';
+			$this->file_mime_type = '';
+			$this->file = '';
+			$this->save();
+			return true;
+		    }
+		}
+		else
+		{
+		    $this->filename = '';
+		    $this->file_mime_type = '';
+		    $this->file = '';
+		    $this->doc_id = '';
+		    $this->save();
+		    return true;
+		}
 
-	return false;
+		return false;
     }
 
 ### Now, we can easily delete attachment.
