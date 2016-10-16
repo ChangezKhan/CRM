@@ -73,3 +73,62 @@
 
 ### After this, you can download attachment for `Cases` module also.
 
+### Now, we will see how to remove attachment. By default there is a button to remove attachment, but it will not work. As the `deleteAttachment` function/method, which executes on click of this button, is not available. So, at first we will add this method/function to our modules file.
+
+### Now, open following file
+
+    modules/<module_name>/<module_name>.php
+
+### Add following code:
+
+    function deleteAttachment($isduplicate="false")
+    {
+        if($this->ACLAccess('edit'))
+	{
+	    if($isduplicate=="true")
+	    {
+	        return true;
+	    }
+            $removeFile = "upload://{$this->id}";	    
+	}
+
+	if(!empty($this->doc_type) && !empty($this->doc_id))
+	{
+	    $document = ExternalAPIFactory::loadAPI($this->doc_type);
+	    $response = $document->deleteDoc($this);
+	    $this->doc_type = '';
+	    $this->doc_id = '';
+	    $this->doc_url = '';
+	    $this->filename = '';
+	    $this->file_mime_type = '';
+	}
+
+	if(file_exists($removeFile))
+	{
+	    if(!unlink($removeFile))
+	    {
+	        $GLOBALS['log']->error("*** Could not unlink() file: [ {$removeFile} ]");
+	    }
+	    else
+	    {
+	        $this->filename = '';
+		$this->file_mime_type = '';
+		$this->file = '';
+		$this->save();
+		return true;
+	    }
+	}
+	else
+	{
+	    $this->filename = '';
+	    $this->file_mime_type = '';
+	    $this->file = '';
+	    $this->doc_id = '';
+	    $this->save();
+	    return true;
+	}
+
+	return false;
+    }
+
+### Now, we can easily delete attachment.
