@@ -40,6 +40,14 @@
         'importable' => false,
     );
 
-### Now do a "Quick Repair & Rebuild"
+### Now, add following code to `editviewdefs.php` file in following location:
+
+    custom/modules/<module_name>/metadata/editviewdefs.php
+
+#### Code: 
+
+    'enctype' => 'multipart/form-data',
+
+### Now, do a "Quick Repair & Rebuild". 
 
 
