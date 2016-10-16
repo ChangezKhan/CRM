@@ -107,15 +107,15 @@
 		{
 		    if(!unlink($removeFile))
 		    {
-			$GLOBALS['log']->error("*** Could not unlink() file: [ {$removeFile} ]");
+				$GLOBALS['log']->error("*** Could not unlink() file: [ {$removeFile} ]");
 		    }
 		    else
 		    {
-			$this->filename = '';
-			$this->file_mime_type = '';
-			$this->file = '';
-			$this->save();
-			return true;
+				$this->filename = '';
+				$this->file_mime_type = '';
+				$this->file = '';
+				$this->save();
+				return true;
 		    }
 		}
 		else
