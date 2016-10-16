@@ -11,8 +11,8 @@
     /* Create a custom file upload field*/
     
     $dictionary['Case']['fields']['file_mime_type'] = array(
-	'name' => 'file_mime_type',
-	'vname' => 'LBL_FILE_MIME_TYPE',
+        'name' => 'file_mime_type',
+        'vname' => 'LBL_FILE_MIME_TYPE',
 	'type' => 'varchar',
 	'len' => '100',
 	'importable' => false,
