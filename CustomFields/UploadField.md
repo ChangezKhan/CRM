@@ -68,7 +68,7 @@
     elseif($file_type == 'cases') 
     {
         $query = "SELECT filename name, file_mime_type FROM cases ";
-	$query .= "WHERE cases.id = '" . $db->quote($_REQUEST['id']) ."'";
+		$query .= "WHERE cases.id = '" . $db->quote($_REQUEST['id']) ."'";
     }
 
 ### After this, you can download attachment for `Cases` module also.
