@@ -1,4 +1,7 @@
 <?php
+
+/* Create a custom file upload field*/
+
 $dictionary['Case']['fields']['file_mime_type'] = array(
 	'name' => 'file_mime_type',
 	'vname' => 'LBL_FILE_MIME_TYPE',
