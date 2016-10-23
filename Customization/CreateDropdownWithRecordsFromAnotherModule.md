@@ -6,53 +6,53 @@
 
     <?php
 	
-	if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
+		if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
+			
+		require_once('modules/ModuleBuilder/MB/ModuleBuilder.php');
+		require_once('modules/ModuleBuilder/parsers/parser.dropdown.php');
 		
-	require_once('modules/ModuleBuilder/MB/ModuleBuilder.php');
-	require_once('modules/ModuleBuilder/parsers/parser.dropdown.php');
-	
-	/**
-	* Motive : To update the Dropdown editor with the new record as Dropdown using After save logic hook
-	*/
+		/**
+		* Motive : To update the Dropdown editor with the new record as Dropdown using After save logic hook
+		*/
 
-	class StudioUpdate 
-	{
-		function save_dd($dd_name,$new_dd_arr)
+		class StudioUpdate 
 		{
-			$parser = new ParserDropDown();
-			$params = array();
-			$_REQUEST['view_package'] = 'studio';
-			$params['view_package'] = 'studio';
-			$params['dropdown_name'] = $dd_name;
-			$params['dropdown_lang'] = 'en_us';
-			$json = getJSONobj();
-			$params['list_value'] = $json->encode($new_dd_arr);
-			$parser->saveDropDown($params);
-		}
-
-		function StudioUpdate($bean,$arg,$events) 
-		{
-			global $db;
-
-			$related_queue_arr = array();
-			$related_queue_arr[''] = '';
-			
-			$dropdown_list_name = '<DropDown_List_Name>'; //DropDown List name
-			$properties['options'] = $dropdown_list_name;
-
-			$selectQueue_list = "SELECT id,name FROM campaigns WHERE deleted=0";
-			$selectQueue_list_res = $db->query($selectQueue_list);
-			$new_dd_arr[] = array('','');
-			
-			while($selectQueue_list_res_row = $db->fetchByAssoc($selectQueue_list_res))
+			function save_dd($dd_name,$new_dd_arr)
 			{
-				$related_queue_arr[$selectQueue_list_res_row['id']] = $selectQueue_list_res_row['name'];
-				$new_dd_arr[]=array($selectQueue_list_res_row['id'],$selectQueue_list_res_row['name']);
+				$parser = new ParserDropDown();
+				$params = array();
+				$_REQUEST['view_package'] = 'studio';
+				$params['view_package'] = 'studio';
+				$params['dropdown_name'] = $dd_name;
+				$params['dropdown_lang'] = 'en_us';
+				$json = getJSONobj();
+				$params['list_value'] = $json->encode($new_dd_arr);
+				$parser->saveDropDown($params);
 			}
-						
-			$GLOBALS['app_list_strings'][$dropdown_list_name] = $related_queue_arr;
-			$this->save_dd($properties['options'],$new_dd_arr);
-		
+
+			function StudioUpdate($bean,$arg,$events) 
+			{
+				global $db;
+
+				$related_queue_arr = array();
+				$related_queue_arr[''] = '';
+				
+				$dropdown_list_name = '<DropDown_List_Name>'; //DropDown List name
+				$properties['options'] = $dropdown_list_name;
+
+				$selectQueue_list = "SELECT id,name FROM campaigns WHERE deleted=0";
+				$selectQueue_list_res = $db->query($selectQueue_list);
+				$new_dd_arr[] = array('','');
+				
+				while($selectQueue_list_res_row = $db->fetchByAssoc($selectQueue_list_res))
+				{
+					$related_queue_arr[$selectQueue_list_res_row['id']] = $selectQueue_list_res_row['name'];
+					$new_dd_arr[]=array($selectQueue_list_res_row['id'],$selectQueue_list_res_row['name']);
+				}
+							
+				$GLOBALS['app_list_strings'][$dropdown_list_name] = $related_queue_arr;
+				$this->save_dd($properties['options'],$new_dd_arr);
+			
+			}
 		}
-	}
     ?>
