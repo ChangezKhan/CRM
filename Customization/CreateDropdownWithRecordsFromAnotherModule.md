@@ -4,7 +4,7 @@
 
 ### This is following code you should add to logic hook file:
 
-<?php
+    <?php
 	
 	if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 		
@@ -55,5 +55,4 @@
 		
 		}
 	}
-?>
-
+    ?>
