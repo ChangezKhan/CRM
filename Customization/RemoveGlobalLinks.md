@@ -1,8 +1,10 @@
 #Remove unwanted Global Links
 
-### To remove the un-necessary global links, first copy `globalControlLinks.php` file from `include\` directory to `custom\include\` directory.
+### To remove the un-necessary global links, we need to make changes in following file: 
 
-### After copying file, we have just have to comment following arrays:
+	include\globalControlLinks.php
+
+### In this file, we have just have to comment following arrays:
 
     $global_control_links['employees']
     $global_control_links['training']
