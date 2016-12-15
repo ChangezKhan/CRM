@@ -1,8 +1,10 @@
-# Create custom relate field where options built from records from another modules
+# Create custom relate field where options built from records from another modules #
 
-### Consider, we have two modules `A` & `B`. And we want to show all records of module `A`, to show in module `B` as a dropdown. So, first we will create a logic hook in module `A` to get all records and store it into any dropdown. At first, we need to create new dropdown using `Dropdown Editor`, so we can use it in our logic hook file.
+### Consider, we have two modules `A` & `B`. And we want to show all records of module `A`, to show in module `B` as a dropdown. ###
 
-### This is following code you should add to logic hook file:
+### First of all, we will create a logic hook in module `A` to get all records and store it into any dropdown. So, let's create new dropdown using `Dropdown Editor`, so we can use it in our logic hook file. ###
+
+### This is following code you should add to logic hook file: ###
 
     <?php
 	
@@ -37,7 +39,7 @@
 				$related_queue_arr = array();
 				$related_queue_arr[''] = '';
 				
-				$dropdown_list_name = '<DropDown_List_Name>'; //DropDown List name
+				$dropdown_list_name = '<DropDown_List_Name>'; // Newly created DropDown List name
 				$properties['options'] = $dropdown_list_name;
 
 				$selectQueue_list = "SELECT id,name FROM campaigns WHERE deleted=0";
